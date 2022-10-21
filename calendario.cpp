@@ -23,6 +23,18 @@ void escribeMesYAgno(unsigned mes, unsigned year) {
                 << year << endl;
 }
 
+/*
+ * Pre:  agno > 1582.
+ * Post: Devuelve true si y solo si el año «agno» es bisiesto de
+ *       acuerdo con las reglas del calendario gregoriano.
+ */
+bool esBisiesto(unsigned agno) {
+    bool multiplo4   = (agno %   4 == 0);
+    bool multiplo100 = (agno % 100 == 0);
+    bool multiplo400 = (agno % 400 == 0);
+    return multiplo400 || (multiplo4 && !multiplo100);
+}
+
 /* Pre: year>=1900 y 1<= mes <=12
  * Función escribeCabecera, escribe por pantalla la cabecera del calendario
  * correspondiente a mes con el formato:
@@ -31,8 +43,46 @@ void escribeMesYAgno(unsigned mes, unsigned year) {
  *     -------------------------- */
 void escribeCabecera(unsigned mes, unsigned year) {
   escribeMesYAgno(mes, year);
-  cout << right << setw(28) << " L   M   X   J   V   S   D" << endl;
-  cout << right << setw(28) << "--------------------------" << endl;
+  cout << setw(28) << " L   M   X   J   V   S   D" << endl;
+  cout << setw(28) << "--------------------------" << endl;
+}
+
+/*
+ * Pre:  agno > 1582.
+ * Post: Devuelve el número de días que tiene el año «agno».
+ *       Por ejemplo: diasDelAgno(2018) devuelve 365 y
+ *                    diasDelAgno(2020) devuelve 366.
+ */
+unsigned diasDelAgno(unsigned agno) {
+    if (esBisiesto(agno)) {
+      return 366;
+    } else {
+      return 365;
+    }
+}
+
+/* Pre: year>=1900 y 1<= mes <=12
+ * Post: Calcula el número de días del mes correspondiente y verifica bisiesto*/
+unsigned calculaDiasDelMes(unsigned mes, unsigned year) {
+  unsigned diasMes[12] = { 31, 28, 31, 30, 31, 30, 31, 31,
+      30, 31, 30, 31};
+  if (esBisiesto(year)) {
+    diasMes[1] = 29;
+  }
+  return diasMes[mes-1];
+}
+
+/* Pre: year>=1900, 1<= mes <=12 y 1<= dia <=31
+ * Post: Calcula el número de días gtranscurridos entre 01/01/1900
+ * y dia/mes/year*/
+unsigned calculaDiasTranscurridos(unsigned year, unsigned mes, unsigned dia) {
+  unsigned result=0;
+  for (unsigned i = 1900; i < year; i++) {
+    result += diasDelAgno(i);
+  }
+  for (unsigned i = 0; i < mes -1; i++) {
+    result += calculaDiasDelMes(i + 1, year);
+  }
 }
 
 /* Pre: year>=1900 y 1<= mes <=12
@@ -43,19 +93,19 @@ void escribeCalendario(unsigned mes, unsigned year) {
   escribeCabecera(mes, year);
 
   unsigned diaDeInicioSemana = 3;
-  unsigned diasDelMes=31;
+  unsigned diasDelMes=calculaDiasDelMes(mes, year);
 
-   for (unsigned i=1; i<=diaDeInicioSemana; i++) {
-    cout << setw(4) << " ";
-  } 
-  for (unsigned i=1; i<6; i++) {
-    for (unsigned j=1; j<8; j++) {
-        if ((7 * (i - 1) + j) <= diasDelMes) {
-          cout << setw(4) << 7 * (i - 1) + j;
-          }
-    }
-    cout << endl;
-  }
+  //  for (unsigned i=1; i<=diaDeInicioSemana; i++) {
+  //   cout << setw(4) << " ";
+  // } 
+  // for (unsigned i=1; i<6; i++) {
+  //   for (unsigned j=1; j<8; j++) {
+  //       if ((7 * (i - 1) + j) <= diasDelMes) {
+  //         cout << setw(4) << 7 * (i - 1) + j;
+  //         }
+  //   }
+  //   cout << endl;
+  // }
 
   /*Forma resuelta en clase
    con este método una función diasDelMes me sirve como tope del bucle
