@@ -83,6 +83,17 @@ unsigned calculaDiasTranscurridos(unsigned year, unsigned mes, unsigned dia) {
   for (unsigned i = 0; i < mes -1; i++) {
     result += calculaDiasDelMes(i + 1, year);
   }
+  result += dia - 1;
+  return result;
+}
+
+/* Pre: year>=1900, 1<= mes <=12 y 1<= dia <=31
+ * Post: Calcula el dia de la semana que corresponde a dia/mes/year
+ * en el calendario Gregoriano.
+ * Devuelve un número positivo entre 0 y 6
+ * Correspondiente a L - M - X - J - V - S - D*/
+unsigned calculadiaDeInicioSemana(unsigned year, unsigned mes, unsigned dia) {
+  return calculaDiasTranscurridos(year, mes, dia) % 7;
 }
 
 /* Pre: year>=1900 y 1<= mes <=12
@@ -92,7 +103,7 @@ unsigned calculaDiasTranscurridos(unsigned year, unsigned mes, unsigned dia) {
 void escribeCalendario(unsigned mes, unsigned year) {
   escribeCabecera(mes, year);
 
-  unsigned diaDeInicioSemana = 3;
+  unsigned diaDeInicioSemana = calculadiaDeInicioSemana(year, mes, 1);
   unsigned diasDelMes=calculaDiasDelMes(mes, year);
 
   //  for (unsigned i=1; i<=diaDeInicioSemana; i++) {
