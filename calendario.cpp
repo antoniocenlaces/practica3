@@ -7,9 +7,8 @@
  ******************************************************************************/
 #include <iostream>
 #include <iomanip>
-#include <cmath>
-#include <ctime>
-#include <cstdlib>
+#include <string>
+
 using namespace std;
 
 /* Pre: year>=1900 y 1<= mes <=12
