@@ -83,6 +83,7 @@ unsigned calculaDiasTranscurridos(unsigned year, unsigned mes, unsigned dia) {
   for (unsigned i = 0; i < mes -1; i++) {
     result += calculaDiasDelMes(i + 1, year);
   }
+  return result;
 }
 
 /* Pre: year>=1900 y 1<= mes <=12
@@ -142,7 +143,7 @@ void escribeCalendario(unsigned mes, unsigned year) {
    }
 
 int main() {
-    unsigned mes,year;
+    unsigned mes=0,year=0;
     pideDatos(mes, year);
     escribeCalendario(mes, year);
     return 0;
