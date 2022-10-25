@@ -1,7 +1,7 @@
 ﻿/******************************************************************************\
  * Curso de Programación 1. Tema 7 y práctica 3
  * Autores originales: Miguel Ángel Latre y Javier Martínez
- * Modificado por: ¡PON AQUÍ TU NOMBRE!
+ * Modificado por: Antonio José González Almela
  * Última revisión: 9 de octubre de 2021
  * Resumen: Módulo principal de un programa interactivo dirigido por menú que
  *          permite al usuario la realización de algunos cálculos con datos de
@@ -17,7 +17,7 @@ using namespace std;
 /*
  * Número de operaciones que ofrece actualmente el menú del programa.
  */
-const unsigned NUM_OPERACIONES = 5;
+const unsigned NUM_OPERACIONES = 7;
 
 /*
  *  Pre:  ---
@@ -33,6 +33,8 @@ void presentarMenu() {
     cout << "3 - Extraer una cifra de un entero" << endl;
     cout << "4 - Calcular la imagen especular de un entero" << endl;
     cout << "5 - Comprobar si un entero es primo" << endl;
+    cout << "6 - Calcular el factorial de un númer0" << endl;
+    cout << "7 - Calcular el máximo común divisor de dos números" << endl;
     cout << endl;
 }
 
@@ -116,6 +118,33 @@ void ejecutarEsPrimo(int numero) {
     cout << " es primo." << endl;
 }
 
+/*
+ * Pre:  ---
+ * Post: Ha ejecutado la 6ª orden, informando del factorial de «numero»
+ */
+void ejecutarFactorial(int numero) {
+   if (numero < 0) {
+    cout << "El número tiene que ser natural." << endl;
+   } else {
+    cout << "El factorial de " << numero << " es " << factorial(numero) << endl;
+   }
+}
+
+/*
+ * Pre:  ---
+ * Post: Ha ejecutado la 7ª orden, informando del MCD de «numero»
+ */
+void ejecutarMcd(int numero1) {
+   int numero2;
+   cout << "Escriba otro número: ";
+   cin >> numero2;
+   if (numero1 != 0 || numero2 != 0) {
+    cout << "El máximo común divisor de " << numero1 << " y " << numero2 << " es "
+        << mcd(numero1, numero2) << endl;
+   } else {
+
+   }
+}
 
 /*
  *  Pre:  ---
@@ -146,6 +175,11 @@ void ejecutarOrden(unsigned operacion) {
         }
         else if (operacion == 5) {
             ejecutarEsPrimo(numero);
+        }
+        else if (operacion == 6) {
+            ejecutarFactorial(numero);
+        } else if (operacion == 7) {
+            ejecutarMcd(numero);
         }
     }
     else {

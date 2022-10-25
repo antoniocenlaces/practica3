@@ -82,9 +82,6 @@ unsigned calculaDiasTranscurridos(unsigned year, unsigned mes, unsigned dia) {
   for (unsigned i = 0; i < mes -1; i++) {
     result += calculaDiasDelMes(i + 1, year);
   }
-<<<<<<< HEAD:Calendario-monobloque/calendario.cpp
-  return result;
-=======
   result += dia - 1;
   return result;
 }
@@ -96,7 +93,7 @@ unsigned calculaDiasTranscurridos(unsigned year, unsigned mes, unsigned dia) {
  * Correspondiente a L - M - X - J - V - S - D*/
 unsigned calculadiaDeInicioSemana(unsigned year, unsigned mes, unsigned dia) {
   return calculaDiasTranscurridos(year, mes, dia) % 7;
->>>>>>> e847c44693fb655e5811513041f8133447c9d676:calendario.cpp
+
 }
 
 /* Pre: year>=1900 y 1<= mes <=12
