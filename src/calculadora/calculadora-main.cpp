@@ -1,4 +1,4 @@
-﻿/*******************************************************************************
+﻿/******************************************************************************\
  * Curso de Programación 1. Tema 7 y práctica 3
  * Autores originales: Miguel Ángel Latre y Javier Martínez
  * Modificado por: ¡PON AQUÍ TU NOMBRE!
@@ -8,7 +8,7 @@
  *          tipo entero
  * Nota: Leer el fichero README.md, que contiene instrucciones para su 
  *       compilación y ejecución.
- ******************************************************************************/
+\******************************************************************************/
 
 #include <iostream>
 #include "calculos.hpp"

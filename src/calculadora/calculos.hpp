@@ -1,4 +1,4 @@
-﻿/*******************************************************************************
+﻿/******************************************************************************\
  * Curso de Programación 1. Tema 7 y práctica 3
  * Autores originales: Miguel Ángel Latre y Javier Martínez
  * Modificado por: ¡PON AQUÍ TU NOMBRE! (funciones establecidas en la práctica 3)
@@ -7,7 +7,7 @@
  *          «calculos» que facilita algunas funciones para trabajar con
  *          datos de tipo entero
  *          Versión específica de la práctica 3.
- ******************************************************************************/
+\******************************************************************************/
 
 
 /*

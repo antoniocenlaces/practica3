@@ -1,4 +1,4 @@
-﻿/*******************************************************************************
+﻿/******************************************************************************\
  * Curso de Programación 1. Práctica 3
  * Autores originales: Miguel Ángel Latre y Javier Martínez
  * Modificado por: ¡PON AQUÍ TU NOMBRE! (código de las funciones establecidas en
@@ -6,7 +6,7 @@
  * Última revisión: 8 de octubre de 2021
  * Resumen: Fichero de implementación de un módulo «fechas» que ofrece
  *          funciones para trabajar con fechas del calendario
- ******************************************************************************/
+\******************************************************************************/
 
 #include "fechas.hpp"
 

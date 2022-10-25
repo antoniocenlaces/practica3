@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Depurar fichero activo en el editor",
+            "name": "Depurar proyecto «calculadora»",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}",
+            "program": "${workspaceFolder}/bin/calculadora",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
@@ -16,7 +16,10 @@
             "externalConsole": true,
             "MIMode": "gdb",
             "osx": {
-                "MIMode": "lldb"
+                "type": "lldb",
+                "MIMode": "lldb",
+                "args": ["-arg1", "-arg2"],
+                "console": "externalTerminal",
             },
             "setupCommands": [
                 {
@@ -25,7 +28,81 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Compilar fichero activo en el editor"
-        }
+            "preLaunchTask": "Compilar proyecto «calculadora»"
+        },
+        {
+            "name": "Depurar tests del módulo «calculos»",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/calculos-test",
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "osx": {
+                "type": "lldb",
+                "MIMode": "lldb",
+                "args": ["-arg1", "-arg2"],
+                "console": "externalTerminal",
+            },
+            "setupCommands": [
+                {
+                    "description": "Habilitar la impresión con sangría para gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+            ],
+            "preLaunchTask": "Compilar tests del módulo «calculos»"
+        },
+        {
+            "name": "Depurar proyecto «calendario»",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/calendario",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "osx": {
+                "type": "lldb",
+                "MIMode": "lldb",
+                "args": ["-arg1", "-arg2"],
+                "console": "externalTerminal",
+            },
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Compilar proyecto «calendario»"
+        },
+        {
+            "name": "Depurar tests del módulo «fechas»",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/fechas-test",
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "osx": {
+                "type": "lldb",
+                "MIMode": "lldb",
+                "args": ["-arg1", "-arg2"],
+                "console": "externalTerminal",
+            },
+            "setupCommands": [
+                {
+                    "description": "Habilitar la impresión con sangría para gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+            ],
+            "preLaunchTask": "Compilar tests del módulo «fechas»"
+        },
     ]
 }

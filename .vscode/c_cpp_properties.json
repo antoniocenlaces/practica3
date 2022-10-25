@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Programación 1",
+            "includePath": [
+                "${default}",
+                "${workspaceFolder}/test/testing-prog1",
+                "${workspaceFolder}/src/calculadora",
+                "${workspaceFolder}/src/calendario"
+            ]
+        }
+    ],
+    "version": 4
+}

@@ -1,26 +1,116 @@
 {
     "tasks": [
         {
+            "label": "Open Terminal",
             "type": "shell",
-            "label": "Compilar fichero activo en el editor",
-            "command": "g++",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
+            "command": "osascript -e 'tell application \"Terminal\"\ndo script \"echo hello\"\nend tell'",
+            "problemMatcher": []
+        },
+        {
+            "label": "Compilar proyecto «calculadora»",
+            "type": "shell",
+            "command": "make",
+            "windows": {
+                "command": "mingw32-make",
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "problemMatcher": ["$gcc"],
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
-        }
+            },
+        },
+        {
+            "label": "Ejecutar proyecto «calculadora»",
+            "type": "shell",
+            "command": "bin/calculadora",
+            "windows": {
+                "command": "chcp 65001 ; bin\\calculadora",
+            },
+            "dependsOn": "Compilar proyecto «calculadora»",
+            "problemMatcher": ["$gcc"],
+        },
+        {
+            "label": "Compilar tests del módulo «calculos»",
+            "type": "shell",
+            "command": "make",
+            "windows": {
+                "command": "mingw32-make",
+            },
+            "args": [
+                "calculos-test"
+            ],
+            "problemMatcher": ["$gcc"],
+            "group": "test",
+        },
+        {
+            "label": "Ejecutar tests del módulo «calculos»",
+            "type": "shell",
+            "command": "bin/calculos-test",
+            "windows": {
+                "command": "chcp 65001 ; bin\\calculos-test",
+            },
+            "dependsOn": "Compilar tests del módulo «calculos»",
+            "problemMatcher": ["$gcc"],
+        },
+        {
+            "label": "Compilar proyecto «calendario»",
+            "type": "shell",
+            "command": "make",
+            "windows": {
+                "command": "mingw32-make",
+            },
+            "args": [
+                "calendario", "-f", "calendario.mk"
+            ],
+            "problemMatcher": ["$gcc"],
+            "group": "build",
+        },
+        {
+            "label": "Ejecutar proyecto «calendario»",
+            "type": "shell",
+            "command": "bin/calendario",
+            "windows": {
+                "command": "chcp 65001 ; bin\\calendario.exe",
+            },
+            "dependsOn": "Compilar proyecto «calendario»",
+            "problemMatcher": ["$gcc"],
+        },
+        {
+            "label": "Compilar tests del módulo «fechas»",
+            "type": "shell",
+            "command": "make",
+            "windows": {
+                "command": "mingw32-make",
+            },
+            "args": [
+                "fechas-test", "-f", "calendario.mk"
+            ],
+            "problemMatcher": ["$gcc"],
+            "group": "test",
+        },
+        {
+            "label": "Ejecutar tests del módulo «fechas»",
+            "type": "shell",
+            "command": "bin/fechas-test",
+            "windows": {
+                "command": "chcp 65001 ; bin\\fechas-test",
+            },
+            "dependsOn": "Compilar tests del módulo «fechas»",
+            "problemMatcher": ["$gcc"],
+        },
+        {
+            "label": "Limpiar resultados de compilación",
+            "type": "shell",
+            "command": "make",
+            "windows": {
+                "command": "mingw32-make.exe",
+            },
+            "args": [
+                "clean"
+            ],
+            "problemMatcher": ["$gcc"],
+            "group": "build",
+       },
     ],
     "presentation": {
         "showReuseMessage": true,
