@@ -142,7 +142,7 @@ void ejecutarMcd(int numero1) {
     cout << "El máximo común divisor de " << numero1 << " y " << numero2 << " es "
         << mcd(numero1, numero2) << endl;
    } else {
-
+    cout << "Ambos números no pueden ser 0 simultáneamente." << endl;
    }
 }
 
