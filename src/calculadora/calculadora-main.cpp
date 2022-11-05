@@ -17,7 +17,7 @@ using namespace std;
 /*
  * Número de operaciones que ofrece actualmente el menú del programa.
  */
-const unsigned NUM_OPERACIONES = 7;
+const unsigned NUM_OPERACIONES = 9;
 
 /*
  *  Pre:  ---
@@ -35,6 +35,8 @@ void presentarMenu() {
     cout << "5 - Comprobar si un entero es primo" << endl;
     cout << "6 - Calcular el factorial de un númer0" << endl;
     cout << "7 - Calcular el máximo común divisor de dos números" << endl;
+    cout << "8 - Calcular el mínimo común múltiplo de dos números" << endl;
+    cout << "9 - Comprobar si un entero es capicúa" << endl;
     cout << endl;
 }
 
@@ -147,6 +149,30 @@ void ejecutarMcd(int numero1) {
 }
 
 /*
+ * Pre:  ---
+ * Post: Ha ejecutado la 8ª orden, informando del MCM de «numero»
+ */
+void ejecutarMcm(int numero1) {
+   int numero2;
+   cout << "Escriba otro número: ";
+   cin >> numero2;
+   if (numero1 != 0 || numero2 != 0) {
+    cout << "El mínimo común múltiplo de " << numero1 << " y " << numero2 << " es "
+        << mcm(numero1, numero2) << endl;
+   } else {
+    cout << "Ambos números no pueden ser 0 simultáneamente." << endl;
+   }
+}
+
+/*
+ * Pre:  ---
+ * Post: Ha ejecutado la 9ª orden, informando si es capicúa «numero»
+ */
+void ejecutarCapicua(int numero) {
+   cout << "El número " << numero << (esCapicua(numero) ? " sí " : " no ") << "es capicúa." << endl;
+}
+
+/*
  *  Pre:  ---
  *  Post: Ha ejecutado las acciones asociadas a la orden cuyo código es
  *        igual al valor del parámetro «operacion». Si «operacion» no se
@@ -178,8 +204,15 @@ void ejecutarOrden(unsigned operacion) {
         }
         else if (operacion == 6) {
             ejecutarFactorial(numero);
-        } else if (operacion == 7) {
+        } 
+        else if (operacion == 7) {
             ejecutarMcd(numero);
+        }
+        else if (operacion == 8) {
+            ejecutarMcm(numero);
+        }
+        else if (operacion == 9) {
+            ejecutarCapicua(numero);
         }
     }
     else {
