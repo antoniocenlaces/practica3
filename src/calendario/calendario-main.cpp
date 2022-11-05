@@ -13,26 +13,82 @@
 \******************************************************************************/
 #include <iostream>
 #include <string>
+#include <iomanip>
+#include "fechas.hpp"
 using namespace std;
 
-/*
- * Pre:  1 ≤ mes ≤ 12
- * Post: Ha escrito en la pantalla el nombre (en mayúsculas) del mes
- *       correspondiente al valor del parámetro «mes».
- * Nota: Este código lo podrás comprender adecuadamente cuando hayamos visto
- *       los temas 9 (vectores) y 10 (cadenas de caracteres).
- */
-void escribirNombreMes(unsigned mes) {
-    const string NOMBRES_MES[12] = { "ENERO",
+/* Pre: year>=1900 y 1<= mes <=12
+ * Función escribeMesYAgno, escribe el nombre del mes que corresponde
+ * en mayúsculas y el año */
+void escribeMesYAgno(unsigned mes, unsigned year) {
+  const string NOMBRES_MES[12] = { "ENERO",
             "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO",
             "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE" };
-    cout << NOMBRES_MES[mes - 1];
+            cout << right << setw(23) << NOMBRES_MES[mes - 1] << " "
+                << year << endl;
 }
 
+/* Pre: year>=1900 y 1<= mes <=12
+ * Función escribeCabecera, escribe por pantalla la cabecera del calendario
+ * correspondiente a mes con el formato:
+ *                   OCTUBRE 2022
+ *      L   M   X   J   V   S   D
+ *     -------------------------- */
+void escribeCabecera(unsigned mes, unsigned year) {
+  escribeMesYAgno(mes, year);
+  cout << setw(28) << " L   M   X   J   V   S   D" << endl;
+  cout << setw(28) << "--------------------------" << endl;
+}
+
+/* Pre: year>=1900 y 1<= mes <=12
+ * Función escribeCalendario recibe dos enteros sin signo:
+ * (year>=1900 y 1<= mes <=12) y escribe en pantalla el calendario
+ * mensual correspondiente*/
+void escribeCalendario(unsigned mes, unsigned year) {
+  escribeCabecera(mes, year);
+    unsigned diaDeInicioSemana = diaDeLaSemana(1, mes, year);
+  unsigned diasEnElMes =diasDelMes(mes, year);
+
+  /*Forma resuelta en clase
+   con este método una función diasDelMes me sirve como tope del bucle
+   deja espacios (tantos como el dia en el que inicia la semana)
+   diaDeLaSemana es el número de días de 1900 hasta la fecha y hacer módulo 7*/
+  
+  for (unsigned i=1; i<=diaDeInicioSemana; i++) {
+    cout << setw(4) << " ";
+  }
+  for (unsigned i=1; i<=diasEnElMes; i++) {
+    cout << setw(4) << i;
+    if ((i + diaDeInicioSemana) % 7 == 0) {
+      cout << endl;
+    }
+  }
+}
+
+/* Pre: ---
+ * Función pideDatos, solicita retieradamente al usuario un mes y año
+ * hasta que cumplen la consición (year>=1900 y 1<= mes <=12) */
+   void pideDatos(unsigned& mes, unsigned& year) {
+      cout << "Introduzca el mes [1-12]: ";
+      cin >> mes;
+      while (mes <= 0 || mes > 12) {
+        cout << "El mes debe estar comprendido entre 1 y 12: ";
+        cin >> mes;
+      }
+      cout << "Introduzca un año igual o posterior a 1900: ";
+      cin >> year;
+      while (year < 1900) {
+        cout << "El año debe ser igual o posterior a 1900: ";
+        cin >> year;
+      }
+   }
 
 /*
  * ¡ESCRIBE LA ESPECIFICACIÓN!
  */
 int main() {
+    unsigned mes=0,year=0;
+    pideDatos(mes, year);
+    escribeCalendario(mes, year);
     return 0;
 }

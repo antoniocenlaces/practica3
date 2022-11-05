@@ -1,8 +1,8 @@
 ﻿/******************************************************************************\
  * Curso de Programación 1. Práctica 3
  * Autores originales: Miguel Ángel Latre y Javier Martínez
- * Modificado por: ¡PON AQUÍ TU NOMBRE! (código de las funciones establecidas en
- *                 la práctica 3)
+ * Modificado por: Antonio José González Almela (código de las funciones 
+ *                 establecidas enla práctica 3)
  * Última revisión: 8 de octubre de 2021
  * Resumen: Fichero de implementación de un módulo «fechas» que ofrece
  *          funciones para trabajar con fechas del calendario
@@ -21,7 +21,7 @@
  */
 void componer(unsigned dia, unsigned mes, unsigned agno,
               unsigned& f) {
-    // Completar
+    f = agno * 10000 + mes * 100 + dia;
 }
 
 
@@ -35,7 +35,10 @@ void componer(unsigned dia, unsigned mes, unsigned agno,
  */
 void descomponer(unsigned f,
                  unsigned& dia, unsigned& mes, unsigned& agno) {
-    // Completar
+    dia = f % 100;
+    f = f / 100;
+    mes = f % 100;
+    agno = f / 100;
 }
 
 
@@ -48,7 +51,7 @@ void descomponer(unsigned f,
  *       del parámetro «f1» es anterior a la representada por «f2».
  */
 bool esAnterior(unsigned f1, unsigned f2) {
-    // Completar
+    return f1 < f2 ? true : false;
 }
 
 
@@ -74,7 +77,12 @@ bool esBisiesto(unsigned agno) {
  *                    diasDelMes(2, 2020) devuelve 29.
  */
 unsigned diasDelMes(unsigned mes, unsigned agno) {
-    // Completar
+   unsigned diasMes[12] = { 31, 28, 31, 30, 31, 30, 31, 31,
+      30, 31, 30, 31};
+  if (esBisiesto(agno)) {
+    diasMes[1] = 29;
+  }
+  return diasMes[mes-1];
 }
 
 
@@ -85,7 +93,11 @@ unsigned diasDelMes(unsigned mes, unsigned agno) {
  *                    diasDelAgno(2020) devuelve 366.
  */
 unsigned diasDelAgno(unsigned agno) {
-    // Completar
+    if (esBisiesto(agno)) {
+      return 366;
+    } else {
+      return 365;
+    }
 }
 
 
@@ -100,7 +112,12 @@ unsigned diasDelAgno(unsigned agno) {
  *                    diaEnElAgno(31, 12, 2020) devuelve 366.
  */
 unsigned diaEnElAgno(unsigned dia, unsigned mes, unsigned agno) {
-    // Completar
+    unsigned result=0;
+    for (unsigned i = 0; i < mes -1; i++) {
+    result += diasDelMes(i + 1, agno);
+  }
+    result += dia;
+    return result;
 }
 
 
@@ -121,7 +138,16 @@ unsigned diaEnElAgno(unsigned dia, unsigned mes, unsigned agno) {
  *       diaSiguiente(d, m, a) los valores serían d = 1, m = 1 y a = 2023.
  */
 void diaSiguiente(unsigned& dia, unsigned& mes, unsigned& agno) {
-    // Completar
+    if (dia < diasDelMes(mes, agno)) {
+        dia++;
+    } else if (mes == 12) {
+        dia = 1;
+        mes = 1;
+        agno++;
+    } else {
+        dia = 1;
+        mes++;
+    }
 }
 
 
@@ -135,5 +161,10 @@ void diaSiguiente(unsigned& dia, unsigned& mes, unsigned& agno) {
  *       codifica martes y así sucesivamente hasta el 6, que codifica el domingo.
  */
 unsigned diaDeLaSemana(unsigned dia, unsigned mes, unsigned agno) {
-    // Completar
+  unsigned result=0;
+  for (unsigned i = 1900; i < agno; i++) {
+    result += diasDelAgno(i);
+  }
+  result += diaEnElAgno(dia, mes, agno) - 1;
+  return result % 7;
 }
