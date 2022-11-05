@@ -165,7 +165,13 @@ unsigned mcd(int a, int b) {
 * Post: Ha devuelto el mínimo común múltiplo de «a» y «b».
 */
 unsigned mcm(int a, int b) {
-    return a * b / mcd(a, b);
+    if (a < 0) {
+        a = -a;
+    }
+    if (b < 0) {
+        b = -b;
+    }
+    return a / mcd(a, b) * b;
 } 
 
 /*
